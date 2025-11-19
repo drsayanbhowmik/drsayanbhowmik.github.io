@@ -14,7 +14,7 @@ https://templatemo.com/tm-566-medic-care
   --brand-title-color:            #1E5BB8;
   --cta-hover:                    #1a5edc;
   --primary-color:                #247cff;
-  --test-color:                   #1E5BB8;
+  --test-color:                   #247cff;
   --section-bg-color:             #E2E7EF;
   --dark-color:                   #000000;
   --title-color:                  #565758;
@@ -388,9 +388,9 @@ strong {
 -----------------------------------------*/
 .navbar-toggler {
     border: 0;
-    padding: 0;
+    padding: 10;
     cursor: pointer;
-    margin: 0;
+    margin: 10;
     width: 15px;
     height: 10px;
     outline: none;
@@ -770,51 +770,106 @@ strong {
     }
 }
 
+/* ABOUT TEXTS */
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-left: 4px solid #007bff;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+}
+.about-text p{
+    font-weight: 450;
+    font-size: 0.9rem;
+}
+.about-text p,
+.about-text strong {
+    color: #6d6d6d;
+}
+
 
 /*---------------------------------------
   GALLERY Cards               
 -----------------------------------------*/
 #gallery {
-    background: linear-gradient(360deg, #ffffff 0%, #e0ebff 100%);
+    background: linear-gradient(360deg, #ffffff 0%, #e7f0ff 100%);
 }
+.g-col {
+    margin-bottom: 20px;
+}
+
 .gallery-card {
-    background: #f5f5f5;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 14px;
+    padding: 0px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    backdrop-filter: blur(4px);
     overflow: hidden;
+
+    transition: transform .3s ease, box-shadow .3s ease;
+    border: 1px solid rgba(36,124,255,0.18);
 }
 
-.ratio-3x4 {
+.gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+}
+
+.ratio-4x3 {
     width: 100%;
-    padding-top: 133.33%; /* 4 / 3 = 1.3333 */
+    padding-top: 75%;
 }
 
-.gallery-card .gallery-img {
+.gallery-img {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    inset: 0px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    /* object-fit: cover; */
+    border-radius: 12px;
+    transition: transform .35s ease, filter .35s ease;
 }
 
+.gallery-card:hover .gallery-img {
+    transform: scale(1.06);
+    filter: brightness(1.02);
+}
 
-/* Force vertical stacking below 767px */
+.gallery-overlay {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    width: calc(100% - 12px);
+
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #ffffff;
+
+    background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    border-radius: 0 0 10px 10px;
+
+    pointer-events: none;
+}
+
+/*RESPONSIVE*/
 @media (max-width: 991px) {
-    .gallery-row > div {
-        flex: 0 0 50% !important;
-        max-width: 50% !important;
-    }
-}
-@media (max-width: 767px) {
-    .gallery-row > div {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
+    .gallery-row > .g-col {
+        flex: 0 0 50%;
+        max-width: 50%;
     }
 }
 
+@media (max-width: 767px) {
+    .gallery-row > .g-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .gallery-title { font-size: 1.5rem; }
+}
 
 
 /*---------------------------------------
@@ -828,7 +883,8 @@ strong {
 
 /* Intro line styling */
 .treatments-intro {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
+    font-weight: 500;
     color: #5a5a5a;
     max-width: 750px;
     margin: 0 auto 45px auto;
@@ -1027,6 +1083,66 @@ strong {
         0 18px 36px rgba(0,0,0,0.16);
 
 }
+
+
+/* SOCIAL ICON ROW */
+.contact-social {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+}
+
+
+.contact-social .social-link {
+    color: #000000;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.25s ease;
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.contact-social .social-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.25s ease;
+}
+
+.contact-social .social-link:hover {
+    color: #ff0c0c;}
+
+.contact-social .social-link:hover::after {
+    width: 100%;
+}
+
+.contact-social i {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+@media (max-width: 786px) {
+    .contact-social {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        column-gap: 16px;
+        row-gap: 10px;
+    }
+
+    .contact-social .social-link {
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+}
+
+
 /* Icon container */
 .icon-circle {
     width: 52px;
@@ -1094,6 +1210,7 @@ strong {
     background: #ffffff;
     transition: all 0.25s ease;
 }
+
 
 .app-input:hover {
     border-color: #8bb3ff !important;
@@ -1283,11 +1400,220 @@ strong {
   }
 }
 
+/*---------------------------------------
+  KNOWLEDGE HUB
+-----------------------------------------*/
+/* ===== BASIC ADJUSTMENTS PER YOUR MANUAL EDIT ===== */
+.kh-subsection {
+    margin-bottom: 30px;
+}
+
+.kh-subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #000000;
+    text-align: left;
+}
+
+#knowledgehub h2 {
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* ===== CARD LAYOUT ===== */
+.kh-card {
+    position: relative;
+    display: flex;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(36,124,255,0.25);
+    background-clip: padding-box;
+    padding: 8px;
+    margin-bottom: 18px;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Gradient Border */
+.kh-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #247cff 0%, #5aa6ff 100%);
+    -webkit-mask: 
+       linear-gradient(#fff 0 0) content-box, 
+       linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Hover effect */
+.kh-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+/* Hover overlay */
+.kh-hover {
+    position: absolute;
+    inset: 0;
+    background: rgba(36,124,255,0.08);
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+.kh-card:hover .kh-hover {
+    opacity: 1;
+}
+
+/* ===== IMAGE ===== */
+.kh-img-wrapper {
+    flex: 0 0 38%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.kh-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ===== CONTENT ===== */
+.kh-card-content {
+    flex: 1;
+    padding: 10px 10px;
+}
+
+.kh-category {
+    display: block;
+    font-size: 0.82rem;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+/* Color coded categories */
+.articles { color: #247cff; }
+.research { color: #008d8d; }
+.clinical { color: #d9534f; }
+.ai { color: #9467ff; }
+
+/* Title */
+.kh-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0;
+}
+
+/* Read More */
+.read-more {
+  margin: 0 0 0 0;
+  text-align: right;
+}
+
+.read-more a {
+  font-weight: 450;
+  color: #7fb1fd;
+  text-decoration: italic;
+  font-size: 0.9rem;
+}
+
+.read-more a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE RULES ===== */
+/* 912px–786px → 2 cards per row */
+@media (max-width: 912px) and (min-width: 786px) {
+    .kh-card {
+        padding: 6px;
+    }
+    .kh-title {
+        font-size: 0.9rem;
+    }
+    .kh-category {
+        font-size: 0.78rem;
+    }
+    .kh-card-img {
+        border-radius: 8px;
+    }
+}
+
+/* BELOW 786 px → Compact Vertical Cards */
+@media (max-width: 786px) {
+
+    /* Card stays horizontal */
+    .kh-card {
+        flex-direction: row !important;
+        align-items: center;
+        padding: 8px;
+        min-height: 95px;     /* controls compactness */
+    }
+
+    /* Image column */
+    .kh-img-wrapper {
+        flex: 0 0 30%;        /* image takes 30% width */
+        padding: 4px;         /* inner margin */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .kh-card-img {
+        width: 100%;
+        height: 80px;         /* fixed height for compact layout */
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Text column */
+    .kh-card-content {
+        flex: 1;
+        padding: 4px 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Category (small) */
+    .kh-category {
+        font-size: 0.72rem;
+        margin-bottom: 3px;
+    }
+
+    /* Title (2-line clamp) */
+    .kh-title {
+        font-size: 0.9rem;
+        line-height: 1.15;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;     /* limit to 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Vertical gaps between cards */
+    .kh-card-row {
+        row-gap: 12px;
+    }
+
+}
+
+
+
 
 /*---------------------------------------
   SOCIAL ICON               
 -----------------------------------------*/
-.social-icon {
+/* .social-icon {
   margin: 0;
   padding: 0;
 }
@@ -1314,7 +1640,7 @@ strong {
 
 .social-icon-link:hover {
   color: var(--primary-color);
-}
+} */
 
 /*---------------------------------------
   RESPONSIVE STYLES               
