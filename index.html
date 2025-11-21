@@ -902,64 +902,85 @@
         </div>
     </section>
 
-
-
-</main>
-
-<footer class="site-footer section-padding" id="contact">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-5 me-auto col-12">
-                <h5 class="mb-lg-4 mb-3">Opening Hours</h5>
-
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex">
-                        Sunday : Closed
-                    </li>
-
-                    <li class="list-group-item d-flex">
-                        Monday, Tuesday - Firday
-                        <span>8:00 AM - 3:30 PM</span>
-                    </li>
-
-                    <li class="list-group-item d-flex">
-                        Saturday
-                        <span>10:30 AM - 5:30 PM</span>
-                    </li>
-                </ul>
+<!-- Footer Section -->
+<footer class="footer-section" id="contact">
+    <div class="footer-container">
+        <div class="footer-content">
+            
+            <!-- Column 1: Clinic Details -->
+            <div class="footer-column">
+                <h3 class="footer-heading">Clinic Details</h3>
+                <div class="footer-info">
+                    <p class="clinic-name">HealthCare Plus Clinic</p>
+                    <p class="clinic-address">
+                        123 Park Street, Sector 5<br>
+                        Salt Lake, Kolkata - 700091
+                    </p>
+                    <p class="clinic-phone">
+                        <i class="bi bi-telephone-fill"></i> +91 98300 12345
+                    </p>
+                </div>
             </div>
 
-            <div class="col-lg-2 col-md-6 col-12 my-4 my-lg-0">
-                <h5 class="mb-lg-4 mb-3">Our Clinic</h5>
-
-                <p><a href="mailto:hello@company.co">hello@company.co</a><p>
-
-                <p>123 Digital Art Street, San Diego, CA 92123</p>
+            <!-- Column 2: Clinic Hours -->
+            <div class="footer-column">
+                <h3 class="footer-heading">Clinic Hours</h3>
+                <div class="footer-info">
+                    <ul class="clinic-hours">
+                        <li><span>Monday – Friday</span> <span>9:00 AM – 6:00 PM</span></li>
+                        <li><span>Saturday</span> <span>10:00 AM – 4:00 PM</span></li>
+                        <li><span>Sunday</span> <span>Closed</span></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-12 ms-auto">
-                <h5 class="mb-lg-4 mb-3">Socials</h5>
+            
+            <!-- Column 3: Contact + Social -->
+            <div class="footer-column">
+                <h3 class="footer-heading">Contact</h3>
+                <div class="footer-info">
+                    <div class="contact-row">
+                        <span class="footer-contact-label">Call / WhatsApp:</span>
+                        <a href="tel:+919830012345" class="footer-contact-value">+91 98300 12345</a>
+                    </div>
 
-                <ul class="social-icon">
-                    <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                    <div class="contact-row">
+                        <span class="footer-contact-label">Email:</span>
+                        <a href="mailto:contact@drsayanbhowmik.com" class="footer-contact-value">contact@drsayanbhowmik.com</a>
+                    </div>
+                </div>
 
-                    <li><a href="#" class="social-icon-link bi-twitter"></a></li>
 
-                    <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                    <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-                </ul>
-            </div>
-
-            <div class="col-lg-3 col-12 ms-auto mt-4 mt-lg-0">
-                <p class="copyright-text">Copyright © Medic Care 2021 
-                <br><br>Design: <a href="https://templatemo.com" target="_parent">TemplateMo</a></p>
+                <h3 class="footer-heading footer-heading-social">Social Media</h3>
+                <div class="footer-info">
+                    <ul class="social-icons">
+                        <li><a href="https://facebook.com/drsayanbhowmik" target="_blank"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="https://instagram.com/drsayanbhowmik" target="_blank"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/drsayanbhowmik" target="_blank"><i class="bi bi-twitter"></i></a></li>
+                        <li><a href="https://linkedin.com/in/drsayanbhowmik" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+                    </ul>
+                </div>
             </div>
 
         </div>
-    </section>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p class="copyright">© <span id="year"></span> Dr. Sayan Bhowmik. All Rights Reserved.</p>
+        </div>
+    </div>
 </footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919830012345" class="floating-whatsapp" target="_blank">
+    <i class="bi bi-whatsapp"></i>
+</a>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
 
 <!-- JAVASCRIPT FILES -->
 <script src="assets/js/jquery.min.js"></script>

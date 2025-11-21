@@ -1595,7 +1595,7 @@ strong {
         line-height: 1.15;
         margin: 0;
         display: -webkit-box;
-        -webkit-line-clamp: 2;     /* limit to 2 lines */
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -1609,38 +1609,376 @@ strong {
 
 
 
-
 /*---------------------------------------
-  SOCIAL ICON               
+  FOOTER - PREMIUM DESIGN             
 -----------------------------------------*/
-/* .social-icon {
-  margin: 0;
-  padding: 0;
+
+.footer-section {
+    background: linear-gradient(180deg, #000000 0%, #1a365d 100%);
+    color: #ffffff;
+    padding: 20px 0 0;
+    position: relative;
 }
 
-.social-icon li {
-  list-style: none;
-  display: inline-block;
-  vertical-align: top;
-  transition: all 0.3s;
+.footer-container {
+    max-width: 1000px;
+    margin: auto;
 }
 
-.social-icon:hover li:not(:hover) {
-  opacity: 0.65;
+/* Footer Content - Desktop */
+.footer-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 0px;
 }
 
-.social-icon-link {
-  font-size: var(--p-font-size);
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  margin-right: 15px;
+/* Footer Columns */
+.footer-column {
+    flex: 1;
+    min-width: 260px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.social-icon-link:hover {
-  color: var(--primary-color);
-} */
+
+.clinic-hours, 
+.social-icons {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    width: 100%;
+}
+
+
+/* Footer Headings */
+.footer-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #3b82f6;
+    display: inline-block;
+    width: auto;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.footer-heading-hours {
+    margin-top: 32px;
+}
+
+.footer-heading-social {
+    margin-top: 5px;
+}
+
+/* Footer Info Container */
+.footer-info {
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1;
+    text-align: left;
+}
+
+/* Clinic Details */
+.clinic-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #78d9ff;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.clinic-address {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.clinic-phone {
+    color: #78d9ff;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+}
+
+
+/* Clinic Hours */
+.clinic-hours {
+    list-style: none;
+    text-align: left;
+}
+
+.clinic-hours li {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.clinic-hours li:last-child {
+    border-bottom: none;
+}
+
+.clinic-hours li span:first-child {
+    color: #e2e8f0;
+    font-weight: 500;
+    min-width: 130px;
+    text-align: left;
+}
+
+.clinic-hours li span:last-child {
+    color: #93c5fd;
+    text-align: left;
+}
+
+/* Contact Items */
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;        /* space between label and value */
+    margin-bottom: 12px;
+}
+
+.footer-contact-label {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.footer-contact-value {
+    color: #93c5fd;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.contact-item:last-of-type {
+    margin-bottom: 0;
+}
+
+
+.footer-contact-value:hover {
+    color: #60a5fa;
+    transform: translateX(2px);
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    margin-top: 8px;
+    justify-content: flex-start;
+}
+
+.social-icons li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+    color: #93c5fd;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.social-icons li a:hover {
+    background: #3b82f6;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px 0;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 13px;
+    color: #94a3b8;
+    letter-spacing: 0.3px;
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #25d366 0%, #20ba5a 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 32px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.floating-whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    background: linear-gradient(135deg, #20ba5a 0%, #1da851 100%);
+}
+
+.floating-whatsapp i {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media (max-width: 1024px) {
+    .footer-content {
+        gap: 50px;
+    }
+    
+    .footer-column {
+        flex: 0 1 280px;
+    }
+}
+
+/* Mobile Styles (below 768px) */
+@media (max-width: 767px) {
+    .footer-section {
+        padding: 40px 16px 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+        align-items: stretch;
+    }
+
+    .footer-column {
+        flex: 1;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .footer-heading {
+        font-size: 15px;
+    }
+
+    .footer-heading-hours {
+        margin-top: 28px;
+    }
+
+    .footer-heading-social {
+        margin-top: 24px;
+    }
+
+    .clinic-name {
+        font-size: 15px;
+    }
+
+    .clinic-hours li {
+        font-size: 13px;
+        gap: 12px;
+    }
+
+    .clinic-hours li span:first-child {
+        min-width: 110px;
+    }
+
+    .footer-contact-value {
+        font-size: 14px;
+    }
+
+    .social-icons {
+        gap: 14px;
+    }
+
+    .social-icons li a {
+        width: 40px;
+        height: 40px;
+        font-size: 17px;
+    }
+
+    .footer-bottom {
+        padding: 20px 0;
+    }
+
+    .copyright {
+        font-size: 12px;
+    }
+
+    .floating-whatsapp {
+        width: 56px;
+        height: 56px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 28px;
+    }
+}
+
+/* Small Mobile (below 480px) */
+@media (max-width: 480px) {
+    .footer-section {
+        padding: 32px 12px 0;
+    }
+
+    .footer-content {
+        gap: 32px;
+    }
+
+    .clinic-hours li {
+        gap: 8px;
+    }
+
+    .clinic-hours li span:first-child {
+        min-width: 100px;
+    }
+
+    .social-icons {
+        gap: 12px;
+    }
+
+    .social-icons li a {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+}
+
+
+
+
 
 /*---------------------------------------
   RESPONSIVE STYLES               
