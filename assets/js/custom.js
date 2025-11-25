@@ -1,79 +1,128 @@
-(function ($) {
-
+(function () {
     "use strict";
 
     /* ------------------------------------------------------------
-       NAVBAR COLLAPSE ON LINK CLICK
+       1. UNIFIED NAVIGATION & SMOOTH SCROLLING
+       (Handles Mobile Menu + Smooth Scroll + Offset in one place)
     ------------------------------------------------------------ */
-    $('.navbar-nav .nav-link').on('click', function () {
-        $(".navbar-collapse").collapse('hide');
-    });
+    const navbar = document.querySelector("#mainNav");
+    const toggler = document.querySelector(".nav-toggler");
+    const menuWrapper = document.querySelector(".nav-menu-wrapper");
 
-
-    /* ------------------------------------------------------------
-       NAVBAR SHRINK ON SCROLL
-    ------------------------------------------------------------ */
-    document.addEventListener("scroll", function () {
-        const nav = document.getElementById("mainNav");
-        if (!nav) return;
-
-        if (window.scrollY > 80) {
-            nav.classList.add("navbar-shrink");
-        } else {
-            nav.classList.remove("navbar-shrink");
-        }
-    });
-
-
-    /* ------------------------------------------------------------
-       REVIEWS CAROUSEL
-    ------------------------------------------------------------ */
-    if ($('.reviews-carousel').length) {
-
-        $('.reviews-carousel').owlCarousel({
-            center: true,
-            loop: true,
-            nav: true,
-            dots: false,
-            autoplay: true,
-            autoplaySpeed: 300,
-            smartSpeed: 500,
-            responsive: {
-                0: { nav: true, items: 1 },
-                768: { items: 2, margin: 50 },
-                1280: { items: 3, margin: 60 }
-            },
-            onInitialized: reviewsNavResize,
-            onResized: reviewsNavResize,
-            onTranslated: reviewsNavResize
+    // --- A. Mobile Menu Toggle (Button Click) ---
+    if (toggler && menuWrapper) {
+        toggler.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent this click from triggering the document listener below
+            menuWrapper.classList.toggle("is-open");
+            toggler.classList.toggle("active");
         });
 
-        function reviewsNavResize() {
-            const centerWidth = $('.reviews-carousel .owl-item.active.center').width();
-
-            if (centerWidth && $(window).width() > 480) {
-                $('.reviews-carousel .owl-nav').css({ width: centerWidth + 'px' });
-            } else {
-                $('.reviews-carousel .owl-nav').css({ width: '100%' });
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (menuWrapper.classList.contains("is-open") && 
+                !navbar.contains(e.target) && 
+                !e.target.closest('.nav-toggler')) {
+                
+                menuWrapper.classList.remove("is-open");
+                toggler.classList.remove("active");
             }
+        });
+    }
+
+    // --- B. Master Click Listener (Links & Scrolling) ---
+    // We use Event Delegation to catch clicks on ANY link (Nav or Buttons)
+    document.addEventListener('click', function(e) {
+        // 1. Check if the clicked element is a link pointing to an ID (starts with #)
+        const anchor = e.target.closest('a[href^="#"]');
+
+        // If it's not a link, or it's just "#", ignore it
+        if (!anchor || anchor.getAttribute('href') === '#') return;
+
+        // 2. STOP the browser's default jump
+        e.preventDefault();
+
+        // 3. Identify the target section
+        const targetId = anchor.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            // 4. Close Mobile Menu (if it's currently open)
+            if (menuWrapper && menuWrapper.classList.contains("is-open")) {
+                menuWrapper.classList.remove("is-open");
+                if (toggler) toggler.classList.remove("active");
+            }
+
+            // 5. Calculate Position with Offset
+            const headerOffset = 80; // Height of your fixed header
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+            // 6. Execute Smooth Scroll
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
         }
+    });
 
-        $(window).on("resize", reviewsNavResize);
-        $(document).on("ready", reviewsNavResize);
-    }
+    // --- C. Shrink Navbar on Scroll ---
+    document.addEventListener("scroll", function () {
+        if (!navbar) return;
+        if (window.scrollY > 80) {
+            navbar.classList.add("navbar-shrink");
+        } else {
+            navbar.classList.remove("navbar-shrink");
+        }
+    });
 
 
     /* ------------------------------------------------------------
-       BANNER CAROUSEL
+       2. REVIEWS CAROUSEL (SWIPER JS)
     ------------------------------------------------------------ */
-    const myCarousel = document.querySelector('#myCarousel');
-    if (myCarousel) {
-        new bootstrap.Carousel(myCarousel, { interval: 1500 });
+    if (document.querySelector('.reviews-swiper')) {
+        new Swiper(".reviews-swiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            centeredSlides: true,
+            loop: true,
+            speed: 500,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                },
+                1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 50,
+                }
+            }
+        });
     }
 
 
     /* ------------------------------------------------------------
-       TREATMENT CARDS REVEAL ANIMATION
+       3. BANNER CAROUSEL (Bootstrap 5 Native)
+    ------------------------------------------------------------ */
+    const heroCarousel = document.querySelector('#heroCarousel');
+    if (heroCarousel && typeof bootstrap !== 'undefined') {
+        new bootstrap.Carousel(heroCarousel, {
+            interval: 3500,
+            pause: 'hover',
+            touch: true
+        });
+    }
+
+
+    /* ------------------------------------------------------------
+       4. SCROLL ANIMATIONS (Intersection Observer)
     ------------------------------------------------------------ */
     const treatmentCards = document.querySelectorAll(".treatment-card");
 
@@ -82,33 +131,23 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("reveal");
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 });
 
         treatmentCards.forEach(card => observer.observe(card));
     }
 
 
     /* ------------------------------------------------------------
-       SMOOTH SCROLL FOR INTERNAL ANCHOR LINKS
+       5. FOOTER YEAR
     ------------------------------------------------------------ */
-    $('a[href*="#"]').on('click', function (event) {
-
-        const pathMatch = location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '');
-        const hostMatch = location.hostname === this.hostname;
-
-        if (!pathMatch || !hostMatch) return;
-
-        const target = $(this.hash);
-        if (!target.length) return;
-
-        event.preventDefault();
-
-        $('html, body').animate({
-            scrollTop: target.offset().top - 74
-        }, 800);
+    document.addEventListener("DOMContentLoaded", function() {
+        const yearSpan = document.getElementById("year");
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
     });
 
-
-})(window.jQuery);
+})();
